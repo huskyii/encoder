@@ -12,12 +12,13 @@ Copyright (c) 2014 Jiang Zhu, mail.jiang.cn@gmail.com"""
 #
 #
 #
-# Feel free to use the code in this project in your project.
+# Warning: DO NOT use it in production environment!
 #
 # Created on 2014-4-18
-# Last modified on 2014-4-18
+# Last modified on 2014-5-4
 
 from docopt import docopt
+from math import log2
 
 usage = """%s
 Usage:
@@ -33,7 +34,27 @@ Options:
 """ % __version__
 
 def Shannon(signals):
-    pass
+    epsilon = 1e-100
+    signals.sort(reverse = True)
+    codes = []
+    aj = 0
+    for signal in signals:
+        code_len = int(1 - log2(signal))
+        if 1 - log2(signal) - code_len < epsilon:
+            code_len -= 1
+        code = bin(int(aj * 2**code_len ))
+        diff = code_len+2 - len(code)
+        if diff > 0:
+            tmp = ''
+            for c in code :
+                tmp += c
+                if c == 'b':
+                    for i in range(diff):
+                        tmp += '0'
+            code = tmp
+        codes.append(code)
+        aj += signal
+    return codes
 
 def Fano(signals):
     pass
