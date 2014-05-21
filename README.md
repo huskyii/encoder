@@ -1,6 +1,8 @@
 # Encoder
 
 This is my homework for Information Theory and Coding.
+It implements one coding method(Huffman) for now.
 It is under BSD 2-clause license.
-Feel free to use it in your project.
+
+    Warning: DO NOT use it in production environment
 
